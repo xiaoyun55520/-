@@ -1,0 +1,142 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 1000,
+  "data": [
+    {
+      "id": 10000,
+      "realname": "张三",
+      "deptname": "35",
+      "majorname": "定期保养",
+      "classname": "1000",
+      "grade": "35",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "启用"
+    },
+    {
+      "id": 10001,
+      "realname": "王五",
+      "deptname": "25",
+      "majorname": "故障报修",
+      "classname": "2505",
+      "grade": "25",
+      "telephone": "13834523412",
+      "qq": "34234576",
+      "job": "班长",
+      "status":"启用"
+    },{
+      "id": 10002,
+      "realname": "李四",
+      "deptname": "12",
+      "majorname": "故障报修",
+      "classname": "2200",
+      "grade": "31",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "启用"
+	},{
+      "id": 10003,
+      "realname": "张三",
+      "deptname": "6",
+      "majorname": "定期保养",
+      "classname": "600",
+      "grade": "25",
+      "telephone": "18045678767",
+      "qq": "23789878",
+      "job": "团支部书记",
+      "status":"启用"
+    },{
+    
+      "id": 10004,
+      "realname": "张三",
+      "deptname": "20",
+      "majorname": "定期保养",
+      "classname": "800",
+      "grade": "40",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "禁用"
+    },{
+      "id": 10005,
+      "realname": "王五",
+      "deptname": "5",
+      "majorname": "定期保养",
+      "classname": "750",
+      "grade": "25",
+      "telephone": "13834523412",
+      "qq": "34234576",
+      "job": "班长",
+      "status":"启用"
+    },{
+      "id": 10006,
+      "realname": "张三",
+      "deptname": "6",
+      "majorname": "故障报修",
+      "classname": "6000",
+      "grade": "25",
+      "telephone": "18045678767",
+      "qq": "23789878",
+      "job": "团支部书记",
+      "status":"启用"
+    },{
+      "id": 10007,
+      "realname": "张三",
+      "deptname": "7",
+      "majorname": "定期保养",
+      "classname": "700",
+      "grade": "30",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "启用"
+    },{
+      "id": 10008,
+      "realname": "张三",
+      "deptname": "12",
+      "majorname": "故障报修",
+      "classname": "1200",
+      "grade": "35",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "启用"
+    },{
+      "id": 10007,
+      "realname": "张三",
+      "deptname": "6",
+      "majorname": "定期保养",
+      "classname": "650",
+      "grade": "30",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "启用"
+    },{
+      "id": 10008,
+      "realname": "张三",
+      "deptname": "8",
+      "majorname": "定期保养",
+      "classname": "800",
+      "grade": "32",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "启用"
+    },{
+      "id": 10009,
+      "realname": "赵六",
+      "deptname": "15",
+      "majorname": "故障报修",
+      "classname": "1500",
+      "grade": "38",
+      "telephone": "13545678767",
+      "qq": "89789878",
+      "job": "团支部书记",
+      "status": "启用"
+    }
+  ]
+}
