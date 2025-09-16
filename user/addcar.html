@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css">
+		<style>
+			.required::before {
+				/* 星号内容 */
+				content: "*";
+					/* 红色 */
+				color: #ff0000;
+				/* 与文字保持一点距离 */
+				margin-right: 4px;
+			/* 星号加粗 */
+				font-weight: bold;				
+			}
+		</style>
+		<script>
+			function que(){
+				alert("新增车辆成功！");
+			}
+		</script>
+	</head>
+	<body background="../img/1757905466571_edit_52499963057092.png">
+		<h2>新增车辆</h2>
+		<div class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label required">车辆编号</label>
+				<div class="layui-input-block">
+				<input id="username" type="text" name="username" class="layui-input" lay-verify="required"
+					lay-reqtext="该空不能为空!" placeholder="请输入车辆编号">
+					</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label required">车牌号</label>
+				<div class="layui-input-block">
+				   <input id="userpsw" type="text" name="userpsw" class="layui-input" lay-verify="required"
+					lay-reqtext="车牌号不能为空!">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">登记日期</label>
+				<div class="layui-input-block">
+				   <input id="address" type="text" name="address" class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">车辆所属地</label>
+				<div class="layui-input-block">
+				   <input id="address" type="text" name="address" class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">车辆型号</label>
+				<div class="layui-input-block">
+				   <input id="address" type="text" name="address" class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label required">是否通过车检</label>
+				<div class="layui-input-block">
+					<select lay-verify="required">
+						<option value="1">是</option>
+						<option value="2">否</option>
+					</select>
+				</div>
+			</div><!-- 院系下拉选择结束-->
+			<div class="layui-form-item">
+				<label class="layui-form-label required">是否在保</label>
+				<div class="layui-input-block">
+					<input type="radio" name="sex" value="是" title="是" checked="">
+					<input type="radio" name="sex" value="否" title="否">
+				</div>
+			<!-- </div> -->
+			<!-- <div class="layui-form-item"> -->
+				<!-- <label class="layui-form-label">爱好</label> -->
+				<!-- <div class="layui-input-block"> -->
+					<!-- <input type="checkbox" name="intrest" lay-skin="primary" title="阅读" checked> -->
+					<!-- <input type="checkbox" name="intrest" lay-skin="primary" title="游泳"> -->
+					<!-- <input type="checkbox" name="intrest" lay-skin="primary" title="跳舞"> -->
+				<!-- </div> -->
+			<!-- </div> -->
+			<div class="layui-form-item">
+				<label class="layui-form-label">合规凭证信息</label>
+				<div class="layui-input-block">
+					<input type="checkbox" name="course" lay-skin="tag" title="机动车登记证书" checked>
+					<input type="checkbox" name="course" lay-skin="tag" title="车检标志">
+					<input type="checkbox" name="course" lay-skin="tag" title="购置税完税证明">
+				</div>
+			</div>
+			<div class="layui-form-item">
+			   <label class="layui-form-label">状态</label>
+			   <div class="layui-input-block">
+			       <input type="checkbox" name="status" lay-skin="switch" lay-filter="switchTest" lay-text="启用|禁用">
+			   </div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">备注</label>
+				<div class="layui-input-block">
+					<textarea   name="remark" class="layui-textarea" placeholder="请输入备注信息(车况,行驶里程)"></textarea>
+				</div>
+			</div> <!-- 文本域结束 -->
+			<!-- 提交按钮 -->
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button onclick="que()" class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+				</div>
+			</div><!-- 提交按钮结束 -->
+		</div>	
+		<script src="../lib/layui-v2.6.3/layui.js"></script>	 
+	</body>
+</html>

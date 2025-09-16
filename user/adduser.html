@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>新增驾驶员</title>
+	<!-- 新 Bootstrap5 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+	 
+	<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+	<script src="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+	<script>
+		function checkUserpsw(){
+			upsw=document.getElementById("userpsw").value;
+			upswRegExp=/^[0-9]{18}$/
+			if(upswRegExp.test(upsw)){
+				alert("输入合法");
+			}else{
+				alert("输入有误");
+			}
+		}
+		function checkRealname(){
+			rname=document.getElementById("realname").value;
+			realnameRegExp=/^[\u4e00-\u9fa5]{2,6}$/;
+			if(realnameRegExp.test(rname)){
+				alert("姓名合法");
+			}else{
+				alert("姓名不合法");
+			}
+		}
+	</script>
+	<style>
+		#da{
+			
+			margin: 0 auto;
+			margin-top: 50px;
+		}
+		</style>
+		<script>
+			function que(){
+				alert("新增驾驶员成功！");
+			}
+		</script>
+	</head>
+	<body background="../img/share_image_1757904815027_edit_52134224455585.jpg">
+		<table class="table table-bordered">
+		<div id=da class="container p-5 my-5">
+			<h1>新增驾驶员</h1>
+			<hr>
+			驾驶员姓名
+		    <input id="realname" onblur="checkRealname()" class="form-control" type="text" placeholder="请输入驾驶员姓名">
+		    <br>
+			身份证号
+			<input id="userpsw" onblur="checkUserpsw()" class="form-control" type="text" placeholder="请输入18位身份证号">
+			<br>
+			驾驶员ID
+			<input class="form-control" type="text" placeholder="请输入驾驶员ID">
+			<br>
+			籍贯
+			<br>
+			<textarea class="form-control" placeholder="请输入籍贯"></textarea>
+			<br>
+			是否身体健康
+			<br>
+			<input type="radio" class="form-checked-label">是
+			<input type="radio" class="form-checked-label">否
+			<br>
+			<br>
+			驾驶证编号
+			<input class="form-control" type="text" placeholder="驾驶证编号">
+			<br>
+			电话
+			<input id="userphone" class="form-control" type="text" placeholder="请输入联系电话">
+			<br>
+			工作类型
+			<br>
+			<select class="form-select">
+				<option>全职</option>
+				<option>兼职</option>
+			</select>
+			<input type="checkbox"/>是否为驾龄3年以上的老司机
+			<br>
+			备注
+			<br>
+			<textarea class="form-control" placeholder="请输入备注信息"></textarea>
+			<br>
+            <div class="text-end">   
+			<button class="btn btn-secondary">取消</button>&nbsp;&nbsp;<button onclick="que()" class="btn btn-primary">保存</button>
+		    </div>
+		</div>
+		</table>
+	</body>
+</html>

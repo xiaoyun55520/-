@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+ <html lang="zh-CN">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>出租车驾驶员绑定 - 新增绑定</title>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: Arial, sans-serif;
+         }
+         body {
+             background-color: #f5f5f5;
+             padding: 20px;
+         }
+         .container {
+             max-width: 600px;
+             margin: 0 auto;
+             background: white;
+             padding: 25px;
+             border-radius: 8px;
+             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+         }
+         h1 {
+             text-align: center;
+             color: #333;
+             margin-bottom: 25px;
+             font-size: 24px;
+         }
+         .form-group {
+             margin-bottom: 20px;
+         }
+         label {
+             display: block;
+             margin-bottom: 8px;
+             color: #555;
+             font-weight: 500;
+         }
+         input, select {
+             width: 100%;
+             padding: 12px;
+             border: 1px solid #ddd;
+             border-radius: 4px;
+             font-size: 16px;
+         }
+         input:focus, select:focus {
+             outline: none;
+             border-color: #2196F3;
+             box-shadow: 0 0 0 2px rgba(33,150,243,0.2);
+         }
+         .btn-submit {
+             width: 100%;
+             padding: 14px;
+             background-color: #2196F3;
+             color: white;
+             border: none;
+             border-radius: 4px;
+             font-size: 18px;
+             font-weight: 500;
+             cursor: pointer;
+             transition: background-color 0.3s;
+         }
+         .btn-submit:hover {
+             background-color: #1976D2;
+         }
+         .section-title {
+             font-size: 18px;
+             color: #333;
+             margin: 15px 0 10px;
+             padding-bottom: 5px;
+             border-bottom: 1px solid #eee;
+         }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <h1>出租车驾驶员绑定</h1>
+         <!-- 新增绑定表单 -->
+         <form id="bindForm">
+             <!-- 驾驶员信息区域 -->
+             <div class="section-title">驾驶员信息</div>
+             <div class="form-group">
+                 <label for="driverName">驾驶员姓名 <span style="color: #f44336;">*</span></label>
+                 <input type="text" id="driverName" required placeholder="请输入驾驶员真实姓名">
+             </div>
+             <div class="form-group">
+                 <label for="driverId">身份证号 <span style="color: #f44336;">*</span></label>
+                 <input type="text" id="driverId" required placeholder="请输入18位身份证号码">
+             </div>
+             <div class="form-group">
+                 <label for="driverLicense">驾驶证号 <span style="color: #f44336;">*</span></label>
+                 <input type="text" id="driverLicense" required placeholder="请输入驾驶证编号">
+             </div>
+             <!-- 出租车信息区域 -->
+             <div class="section-title">出租车信息</div>
+             <div class="form-group">
+                 <label for="carNumber">车牌号码 <span style="color: #f44336;">*</span></label>
+                 <input type="text" id="carNumber" required placeholder="请输入完整车牌（如：京A12345）">
+             </div>
+             <div class="form-group">
+                 <label for="carModel">车辆型号 <span style="color: #f44336;">*</span></label>
+                 <select id="carModel" required>
+                     <option value="">请选择车辆型号</option>
+                     <option value="大众朗逸">大众朗逸</option>
+                     <option value="丰田卡罗拉">丰田卡罗拉</option>
+                     <option value="现代伊兰特">现代伊兰特</option>
+                     <option value="比亚迪秦PLUS">比亚迪秦PLUS</option>
+                     <option value="其他">其他</option>
+                 </select>
+             </div>
+             <div class="form-group">
+                 <label for="carId">车辆编号 <span style="color: #f44336;">*</span></label>
+                 <input type="text" id="carId" required placeholder="请输入17位车辆编号">
+             </div>
+             <button type="submit" class="btn-submit">确认绑定</button>
+         </form>
+     </div>
+     <script>
+         // 表单提交处理（模拟绑定逻辑）
+         document.getElementById('bindForm').addEventListener('submit', function(e) {
+             // 阻止表单默认刷新提交行为
+             e.preventDefault();
+             
+             // （可选）可在此处添加表单数据验证逻辑
+            const driverId = document.getElementById('driverId').value;
+                         if (driverId.length !== 18) {
+                             alert('请输入正确的18位身份证号');
+                             return;
+                         }
+                         // 模拟绑定成功反馈
+                         alert('出租车与驾驶员信息绑定提交成功！');
+                         
+                         // 重置表单，清空已输入内容
+                         this.reset();
+                     });
+                 </script>
+             </body>
+             </html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出租车乘客失物查询</title>
+    <!-- 引入样式库，简化样式开发 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 模拟失物数据（可后续对接后端接口替换）
+        const lostItems = [
+            { id: 'LS20240501', name: '黑色双肩包', type: '箱包', time: '2024-05-01 09:15', place: '火车站→中央广场', taxiNum: '京A88888', status: '待认领', contact: '138****6666' },
+            { id: 'LS20240503', name: '银色笔记本电脑', type: '电子设备', time: '2024-05-03 15:30', place: '人民医院→大学城', taxiNum: '京A66666', status: '已认领', contact: '139****7777' },
+            { id: 'LS20240505', name: '棕色钱包', type: '随身物品', time: '2024-05-05 11:20', place: '高铁站→东方小区', taxiNum: '京A99999', status: '待认领', contact: '137****8888' }
+        ];
+
+        // 失物查询功能
+        function searchLostItems() {
+            const itemName = document.getElementById('itemName').value.trim();
+            const taxiNum = document.getElementById('taxiNum').value.trim();
+            const date = document.getElementById('date').value.trim();
+            let result = lostItems;
+
+            // 多条件筛选
+            if (itemName) {
+                result = result.filter(item => item.name.includes(itemName));
+            }
+            if (taxiNum) {
+                result = result.filter(item => item.taxiNum.includes(taxiNum));
+            }
+            if (date) {
+                result = result.filter(item => item.time.includes(date));
+            }
+
+            // 渲染查询结果
+            const tableBody = document.getElementById('lostItemTableBody');
+            tableBody.innerHTML = '';
+
+            if (result.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-gray-500">未查询到匹配的失物信息</td></tr>';
+                return;
+            }
+
+            // 动态生成失物列表
+            result.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'border-b hover:bg-gray-50 transition-colors';
+                row.innerHTML = `
+                    <td class="py-3 px-4">${item.id}</td>
+                    <td class="py-3 px-4">${item.name}</td>
+                    <td class="py-3 px-4">${item.type}</td>
+                    <td class="py-3 px-4">${item.time}</td>
+                    <td class="py-3 px-4">${item.place}</td>
+                    <td class="py-3 px-4">${item.taxiNum}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-1 rounded text-xs ${item.status === '已认领' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                            ${item.status}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4">${item.contact}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 页面加载时默认显示所有失物
+        window.onload = searchLostItems;
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 页面头部 -->
+    <header class="bg-indigo-600 text-white py-4">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-xl font-bold mb-2 md:mb-0">
+                <i class="fa fa-search mr-2"></i>出租车乘客失物查询系统
+            </h1>
+            <nav>
+                <ul class="flex space-x-4 text-sm">
+                    <!-- <li><a href="#" class="hover:text-indigo-200"><i class="fa fa-home mr-1"></i>首页</a></li>
+                    <li><a href="#" class="hover:text-indigo-200"><i class="fa fa-archive mr-1"></i>失物查询</a></li> -->
+                    <li><a href="#" class="hover:text-indigo-200"><i class="fa fa-phone mr-1"></i>联系我们123077</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- 失物查询表单 -->
+        <section class="bg-white rounded-lg shadow-md p-4 mb-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-800">失物查询</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="itemName" class="block text-sm font-medium text-gray-700 mb-1">失物名称</label>
+                    <input type="text" id="itemName" placeholder="例：双肩包、钱包" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                         </div>
+                                         <div>
+                                             <label for="taxiNum" class="block text-sm font-medium text-gray-700 mb-1">出租车牌号</label>
+                                             <input type="text" id="taxiNum" placeholder="例：京A88888" 
+                                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                         </div>
+                                         <div>
+                                             <label for="date" class="block text-sm font-medium text-gray-700 mb-1">丢失日期</label>
+                                             <input type="date" id="date" 
+                                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                         </div>
+                                         <div class="md:col-span-3">
+                                             <button onclick="searchLostItems()" 
+                                                 class="w-full md:w-auto bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                                 <i class="fa fa-search mr-1"></i>查询失物
+                                             </button>
+                                         </div>
+                                     </div>
+                                 </section>
+                                 <!-- 失物列表展示 -->
+                                 <section class="bg-white rounded-lg shadow-md overflow-hidden">
+                                     <div class="p-4 border-b flex justify-between items-center">
+                                         <h2 class="text-lg font-semibold text-gray-800">
+                                             <i class="fa fa-list-alt mr-2"></i>失物信息列表
+                                         </h2>
+                                         <span class="text-sm text-gray-500">共 <span id="itemCount">3</span> 条失物信息</span>
+                                     </div>
+                                     <!-- 适配小屏幕的滚动表格 -->
+                                     <div class="overflow-x-auto">
+                                         <table class="min-w-full divide-y divide-gray-200">
+                                             <thead class="bg-gray-50">
+                                                 <tr>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">失物编号</th>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">失物名称</th>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">失物类型</th>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">丢失时间</th>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">行程路线</th>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">出租车牌号</th>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">认领状态</th>
+                                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">联系电话</th>
+                                                 </tr>
+                                             </thead>
+                                             <tbody id="lostItemTableBody" class="bg-white divide-y divide-gray-200">
+                                                 <!-- JS动态渲染失物数据 -->
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                 </section>
+                             </main>
+	</body>
+</html>

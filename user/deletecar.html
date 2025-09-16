@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+ <html lang="zh-CN">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>删除车辆信息</title>
+     <style>
+         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+         .car-info { border: 1px solid #eee; padding: 20px; border-radius: 8px; margin: 20px 0; }
+         .info-item { margin: 10px 0; }
+         .btn-group { margin: 20px 0; }
+         button { 
+             padding: 8px 16px; 
+             border: none; 
+             border-radius: 4px; 
+             cursor: pointer; 
+             margin-right: 10px;
+         }
+         .cancel-btn { background: #eee; color: #333; }
+         .delete-btn { background: #dc3545; color: white; }
+         /* 弹窗样式 */
+         .modal { 
+             display: none; 
+             position: fixed; 
+             top: 0; 
+             left: 0; 
+             width: 100%; 
+             height: 100%; 
+             background: rgba(0,0,0,0.5); 
+             align-items: center; 
+             justify-content: center;
+         }
+         .modal-content { 
+             background: white; 
+             padding: 30px; 
+             border-radius: 8px; 
+             text-align: center;
+             width: 90%; 
+             max-width: 400px;
+         }
+         .success-tip { 
+             color: #28a745; 
+             margin-top: 20px; 
+             display: none;
+         }
+     </style>
+ </head>
+ <body>
+     <h1>删除车辆信息</h1>
+     <p>此操作不可撤销，请确认是否删除以下车辆信息！</p>
+     <!-- 车辆信息展示 -->
+     <div class="car-info">
+         <div class="info-item"><strong>车辆编号：</strong> <input type="text"/></div>
+         <div class="info-item"><strong>车牌号：</strong><input type="text"/></div>
+         <div class="info-item"><strong>车辆型号：</strong><input type="text"/></div>
+         <div class="info-item"><strong>行驶里程：</strong><input type="text"/></div>
+     </div>
+     <!-- 操作按钮 -->
+     <div class="btn-group">
+         <button class="cancel-btn" onclick="window.history.back()">取消</button>
+         <button class="delete-btn" onclick="showModal()">确认删除</button>
+     </div>
+     <!-- 删除成功提示 -->
+     <div class="success-tip" id="successTip">
+         ✅ 车辆信息删除成功！<a href="../page/home.html">返回主页</a>
+     </div>
+     <!-- 确认弹窗 -->
+     <div class="modal" id="confirmModal">
+         <div class="modal-content">
+             <h3>确定要删除吗？</h3>
+             <p>删除后车辆所有数据将永久丢失，无法恢复</p>
+             <div style="margin-top: 20px;">
+                 <button class="cancel-btn" onclick="closeModal()">取消</button>
+                 <button class="delete-btn" onclick="deleteCar()">确认删除</button>
+             </div>
+         </div>
+     </div>
+     <script>
+         // 获取DOM元素
+         const modal = document.getElementById('confirmModal');
+         const successTip = document.getElementById('successTip');
+         // 显示确认弹窗
+         function showModal() {
+             modal.style.display = 'flex';
+         }
+         // 关闭弹窗
+         function closeModal() {
+             modal.style.display = 'none';
+         }
+         // 模拟删除逻辑
+         function deleteCar() {
+             // 实际项目中替换为真实接口请求
+             closeModal();
+             // 显示成功提示
+             successTip.style.display = 'block';
+         }
+     </script>
+ </body>
+ </html>

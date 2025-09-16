@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+ <html lang="zh-CN">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>订单统计图表</title>
+     <!-- 引入EChartsCDN，无需本地下载 -->
+     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: Arial, sans-serif;
+         }
+         body {
+             background-color: #f5f5f5;
+             padding: 15px;
+         }
+         .container {
+             max-width: 1000px;
+             margin: 0 auto;
+         }
+         h1 {
+             text-align: center;
+             color: #333;
+             font-size: 22px;
+             margin-bottom: 20px;
+         }
+         /* 图表容器样式 */
+         .chart-item {
+             background: white;
+             border-radius: 8px;
+             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+             padding: 15px;
+             margin-bottom: 20px;
+         }
+         .chart-title {
+             font-size: 16px;
+             color: #555;
+             margin-bottom: 10px;
+             font-weight: 500;
+         }
+         #trendChart, #channelChart, #statusChart {
+             width: 100%;
+             height: 300px; /* 固定图表高度，确保显示完整 */
+         }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <h1>订单统计分析</h1>
+         <!-- 1. 折线图：近7日订单趋势 -->
+         <div class="chart-item">
+             <div class="chart-title">近7日订单量趋势</div>
+             <div id="trendChart"></div>
+         </div>
+         <!-- 2. 柱状图：各渠道订单量 -->
+         <div class="chart-item">
+             <div class="chart-title">各渠道订单量分布</div>
+             <div id="channelChart"></div>
+         </div>
+         <!-- 3. 饼图：订单状态占比 -->
+         <div class="chart-item">
+             <div class="chart-title">当前订单状态占比</div>
+             <div id="statusChart"></div>
+         </div>
+     </div>
+     <script>
+         // 初始化图表函数（通用）
+         function initChart(domId, option) {
+             const chartDom = document.getElementById(domId);
+             const myChart = echarts.init(chartDom);
+             myChart.setOption(option);
+             // 适配窗口大小变化
+             window.addEventListener('resize', () => {
+                 myChart.resize();
+             });
+         }
+         // 1. 初始化折线图（近7日订单趋势）
+         const trendOption = {
+             tooltip: {
+                 trigger: 'axis',
+                 formatter: '{b}：{c} 单' // 鼠标悬浮提示格式
+             },
+             xAxis: {
+                 type: 'category',
+                 data: ['1日', '2日', '3日', '4日', '5日', '6日', '7日'], // 近7日日期
+                 axisLabel: { fontSize: 12 } // 适配小屏幕
+             },
+             yAxis: {
+                 type: 'value',
+                 name: '订单量（单）',
+                 nameTextStyle: { fontSize: 12 },
+                 axisLabel: { fontSize: 12 }
+             },
+             series: [{
+                 data: [120, 190, 150, 230, 180, 250, 220], // 模拟每日订单量
+                 type: 'line',
+                 smooth: true, // 折线平滑
+                 lineStyle: { color: '#4096ff' },
+                 itemStyle: { color: '#4096ff' }
+             }]
+         };
+         initChart('trendChart', trendOption);
+         // 2. 初始化柱状图（各渠道订单量）
+         const channelOption = {
+             tooltip: {
+                 trigger: 'axis',
+                 formatter: '{b}：{c} 单'
+             },
+             xAxis: {
+                 type: 'category',
+                 data: ['APP', '小程序', '官网', '电话', '线下'], // 订单渠道
+                 axisLabel: { fontSize: 12 }
+             },
+             yAxis: {
+                 type: 'value',
+                 name: '订单量（单）',
+                 nameTextStyle: { fontSize: 12 },
+                 axisLabel: { fontSize: 12 }
+             },
+             series: [{
+                 data: [350, 420, 180, 90, 150], // 各渠道模拟数据
+                 type: 'bar',
+                 itemStyle: {
+                     color: ['#4096ff', '#67c23a', '#e6a23c', '#f56c6c', '#909399']
+                 }
+             }]
+         };
+         initChart('channelChart', channelOption);
+         // 3. 初始化饼图（订单状态占比）
+         const statusOption = {
+             tooltip: {
+                 trigger: 'item',
+                 formatter: '{b}：{c}单（{d}%）' // 显示数量+百分比
+             },
+             legend: {
+                 bottom: 0, // 图例放底部，适配小屏幕
+                 textStyle: { fontSize: 12 },
+				 orient: 'horizontal' // 水平排列
+				              },
+				              series: [{
+				                  name: '订单状态',
+				                  type: 'pie',
+				                  radius: ['40%', '70%'], // 环形饼图
+				                  avoidLabelOverlap: false,
+				                  itemStyle: {
+				                      borderRadius: 4, // 扇区圆角
+				                      borderColor: '#fff',
+				                      borderWidth: 2
+				                  },
+				                  label: { show: false }, // 隐藏扇区内部标签
+				                  emphasis: { label: { show: true, fontSize: 14 } },
+				                  labelLine: { show: false },
+				                  data: [
+				                      { value: 450, name: '已完成' },
+				                      { value: 180, name: '待支付' },
+				                      { value: 120, name: '已取消' },
+				                      { value: 80, name: '处理中' }
+				                  ],
+				                  color: ['#67c23a', '#e6a23c', '#f56c6c', '#4096ff']
+				              }]
+				          };
+				          initChart('statusChart', statusOption);
+				      </script>
+				  </body>
+				  </html>

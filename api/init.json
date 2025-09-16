@@ -1,0 +1,172 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/home.html"
+  },
+  "logoInfo": {
+    "title": "出租车管理",
+    "image": "img/share_image_1757474327316.jpeg",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "常规管理",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "首页",
+          "href": "page/home.html",
+          "icon": "fa fa-home",
+          "target": "_self"
+        },
+		{
+		  "title": "驾驶员管理",
+		  "href": "",
+		  "icon": "fa fa-group",
+		  "target": "_self",
+		  "child": [
+		  {
+		    "title": "添加驾驶员",
+		    "href": "user/adduser.html",
+		    "icon": "fa fa-plus-square-o",
+		    "target": "_self"
+		  }, {
+		    "title": "查询驾驶员",
+		    "href": "chaxun.html",
+		    "icon": "fa fa-search",
+		    "target": "_self"
+		  }
+		]
+		},
+        {
+          "title": "车辆信息管理",
+          "href": "",
+          "icon": "fa fa-automobile",
+          "target": "_self",
+          "child": [
+            {
+              "title": "添加车辆",
+              "href": "user/addcar.html",
+              "icon": "fa fa-plus-square-o",
+              "target": "_self"
+            }, {
+              "title": "删除车辆",
+              "href": "user/deletecar.html",
+              "icon": "fa fa-trash",
+              "target": "_self"
+            },{
+              "title": "查询车辆",
+              "href": "user/chacar.html",
+              "icon": "fa fa-search",
+              "target": "_self"
+            },{
+              "title": "修改车辆驾驶员",
+              "href": "user/editcar.html",
+              "icon": "fa fa-eraser",
+              "target": "_self"
+            }, {
+              "title": "绑定驾驶员",
+              "href": "user/bangcar.html",
+              "icon": "fa fa-search-plus",
+              "target": "_self"
+            }
+          ]
+        },
+
+        {
+          "title": "订单管理",
+          "href": "",
+          "icon": "fa fa-tasks",
+          "target": "_self",
+          "child": [
+            {
+              "title": "添加订单",
+              "href": "user/addding.html",
+              "icon": "fa fa-plus-circle",
+              "target": "_self"
+            }, {
+              "title": "查询订单",
+              "href": "user/chading.html",
+              "icon": "fa fa-search-plus",
+              "target": "_self"
+            }, {
+              "title": "订单统计",
+              "href": "user/tongding.html",
+              "icon": "fa fa-bar-chart",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "违章记录管理",
+          "href": "",
+          "icon": "fa fa-video-camera",
+          "target": "_self",
+          "child": [
+            {
+              "title": "删除违章记录",
+              "href": "user/deletewei.html",
+              "icon": "fa fa-trash",
+              "target": "_self"
+            }, {
+              "title": "查询违章记录",
+              "href": "user/chawei.html",
+              "icon": "fa fa-search",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "维修记录管理",
+          "href": "",
+          "icon": "fa fa-wrench",
+          "target": "_self",
+          "child": [
+            {
+              "title": "添加维修记录",
+              "href": "user/addjilu.html",
+              "icon": "fa fa-plus-circle",
+              "target": "_self"
+            }, {
+              "title": "查询维修记录",
+              "href": "chawei.html",
+              "icon": "fa fa-search-plus",
+              "target": "_self"
+            }, {
+              "title": "维修经费统计",
+              "href": "user/tongwei.html",
+              "icon": "fa fa-bar-chart",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "乘客失物管理",
+          "href": "",
+          "icon": "fa fa-suitcase",
+          "target": "_self",
+          "child": [
+            {
+              "title": "添加失物",
+              "href": "user/addshiwu.html",
+              "icon": "fa fa-plus-square-o",
+              "target": "_self"
+            }, {
+              "title": "查询失物",
+              "href": "user/chashi.html",
+              "icon": "fa fa-search",
+              "target": "_self"
+            }, {
+              "title": "删除失物",
+              "href": "user/deleteshiwu.html",
+              "icon": "fa fa-close",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

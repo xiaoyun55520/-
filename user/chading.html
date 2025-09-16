@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出租车订单查询系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 模拟订单数据
+        const orderData = [
+            { id: 'OD20240501001', user: '张三', phone: '138****1234', start: '火车站', end: '中央广场', time: '2024-05-01 08:30', status: '已完成', price: '35.50' },
+            { id: 'OD20240502002', user: '李四', phone: '139****5678', start: '人民医院', end: '高铁站', time: '2024-05-02 14:15', status: '已完成', price: '42.00' },
+            { id: 'OD20240503003', user: '王五', phone: '137****9012', start: '东方小区', end: '市政府', time: '2024-05-03 09:45', status: '待支付', price: '28.70' }
+        ];
+
+        // 查询订单功能
+        function searchOrders() {
+            const orderId = document.getElementById('orderId').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            let result = orderData;
+
+            // 筛选条件
+            if (orderId) {
+                result = result.filter(order => order.id.includes(orderId));
+            }
+            if (phone) {
+                result = result.filter(order => order.phone.includes(phone));
+            }
+
+            // 渲染结果
+            const tableBody = document.getElementById('orderTableBody');
+            tableBody.innerHTML = '';
+            
+            if (result.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" class="text-center py-3 text-gray-500">未查询到相关订单</td></tr>';
+                return;
+            }
+
+            result.forEach(order => {
+                const row = document.createElement('tr');
+                row.className = 'border-b hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="py-2 px-3">${order.id}</td>
+                    <td class="py-2 px-3">${order.user}</td>
+                    <td class="py-2 px-3">${order.phone}</td>
+                    <td class="py-2 px-3">${order.start} → ${order.end}</td>
+                    <td class="py-2 px-3">${order.time}</td>
+                    <td class="py-2 px-3">
+                        <span class="px-2 py-1 rounded text-xs ${order.status === '已完成' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                            ${order.status}
+                        </span>
+                    </td>
+                    <td class="py-2 px-3">¥${order.price}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 页面加载时默认显示所有订单
+        window.onload = searchOrders;
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 头部导航 -->
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold flex items-center">
+                <<i class="fa fa-taxi mr-2"></i>出租车管理系统
+            </h1>
+            <!-- <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#" class="hover:text-blue-200"><i class="fa fa-home mr-1"></i>首页</a></li>
+                    <li><a href="#" class="hover:text-blue-200"><i class="fa fa-list mr-1"></i>订单管理</a></li>
+                    <li><a href="#" class="hover:text-blue-200"><i class="fa fa-user mr-1"></i>个人中心</a></li>
+                </ul>
+            </nav> -->
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- 查询区域 -->
+        <section class="bg-white rounded-lg shadow-md p-4 mb-6">
+            <h2 class="text-lg font-semibold mb-4 flex items-center">
+                <i class="fa fa-search text-blue-600 mr-2"></i>订单查询
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="orderId" class="block text-sm font-medium text-gray-700 mb-1">订单编号</label>
+                    <input type="text" id="orderId" placeholder="输入订单编号查询" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">联系电话</label>
+                    <input type="text" id="phone" placeholder="输入手机号查询"
+					class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+					                 </div>
+					                 <div class="flex items-end">
+					                     <button onclick="searchOrders()" 
+					                         class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+					                         <i class="fa fa-search mr-1"></i>查询订单
+					                     </button>
+					                 </div>
+					             </div>
+					         </section>
+					         <!-- 订单列表区域 -->
+					         <section class="bg-white rounded-lg shadow-md overflow-hidden">
+					             <div class="p-4 border-b flex justify-between items-center">
+					                 <h2 class="text-lg font-semibold flex items-center">
+					                     <i class="fa fa-list-alt text-blue-600 mr-2"></i>订单列表
+					                 </h2>
+					                 <span class="text-sm text-gray-500">共 <span id="orderCount">3</span> 条订单</span>
+					             </div>
+					             <div class="overflow-x-auto">
+					                 <table class="min-w-full divide-y divide-gray-200">
+					                     <thead class="bg-gray-50">
+					                         <tr>
+					                             <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">订单编号</th>
+					                             <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">乘客姓名</th>
+					                             <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">联系电话</th>
+					                             <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">行程路线</th>
+					                             <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">下单时间</th>
+					                             <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">订单状态</th>
+					                             <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">订单金额</th>
+					                         </tr>
+					                     </thead>
+					                     <tbody id="orderTableBody" class="bg-white divide-y divide-gray-200">
+					                         <!-- 订单数据将通过JS动态渲染 -->
+					                     </tbody>
+					                 </table>
+					             </div>
+					         </section>
+					     </main>
+					     <!-- 页脚
+					     <footer class="bg-gray-800 text-white py-4 mt-8">
+					         <div class="container mx-auto px-4 text-center text-sm">
+					             <p>© 2024 出租车管理系统 版权所有</p>
+					         </div>
+					     </footer> -->
+	</body>
+</html>

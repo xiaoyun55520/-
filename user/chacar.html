@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+ <html lang="zh-CN">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>车辆信息查询</title>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: Arial, sans-serif;
+         }
+         body {
+             background-color: #f8f8f8;
+             padding: 20px;
+         }
+         .container {
+             max-width: 500px;
+             margin: 0 auto;
+             background: white;
+             padding: 25px;
+             border-radius: 8px;
+             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+         }
+         h1 {
+             text-align: center;
+             color: #333;
+             font-size: 22px;
+             margin-bottom: 25px;
+         }
+         .form-group {
+             margin-bottom: 20px;
+         }
+         label {
+             display: block;
+             color: #555;
+             margin-bottom: 8px;
+             font-weight: 500;
+         }
+         input {
+             width: 100%;
+             padding: 12px 15px;
+             border: 1px solid #ddd;
+             border-radius: 4px;
+             font-size: 16px;
+         }
+         input:focus {
+             outline: none;
+             border-color: #4096ff;
+             box-shadow: 0 0 0 2px rgba(64,150,255,0.2);
+         }
+         .btn-query {
+             width: 100%;
+             padding: 13px;
+             background-color: #4096ff;
+             color: white;
+             border: none;
+             border-radius: 4px;
+             font-size: 17px;
+             font-weight: 500;
+             cursor: pointer;
+             transition: background 0.3s;
+         }
+         .btn-query:hover {
+             background-color: #3586e0;
+         }
+         /* 结果展示样式 */
+         .result {
+             margin-top: 25px;
+             padding: 18px;
+             border: 1px solid #eee;
+             border-radius: 4px;
+             display: none;
+         }
+         .result-title {
+             font-size: 18px;
+             color: #333;
+             margin-bottom: 15px;
+             padding-bottom: 8px;
+             border-bottom: 1px solid #eee;
+         }
+         .result-item {
+             margin-bottom: 10px;
+             color: #444;
+             font-size: 15px;
+         }
+         .result-item span {
+             font-weight: 500;
+             color: #333;
+         }
+         .no-result {
+             margin-top: 25px;
+             text-align: center;
+             color: #666;
+             padding: 20px;
+             display: none;
+         }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <h1>车辆信息查询</h1>
+         <!-- 查询表单 -->
+         <form id="queryForm">
+             <div class="form-group">
+                 <label for="plateNumber">车牌号码（必填）</label>
+                 <input type="text" id="plateNumber" required placeholder="例如：京A12345">
+             </div>
+             <div class="form-group">
+                 <label for="vinCode">车辆编号（选填）</label>
+                 <input type="text" id="vinCode" placeholder="例如：LZWADAGA6HB123456">
+             </div>
+             <button type="submit" class="btn-query">查询车辆信息</button>
+         </form>
+         <!-- 查询结果展示 -->
+         <div class="result" id="result">
+             <div class="result-title">查询结果</div>
+             <div class="result-item"><span>车牌号码：</span><span id="resPlate">--</span></div>
+             <div class="result-item"><span>车辆型号：</span><span id="resModel">--</span></div>
+             <div class="result-item"><span>车辆识别码：</span><span id="resVIN">--</span></div>
+             <div class="result-item"><span>注册日期：</span><span id="resRegDate">--</span></div>
+             <div class="result-item"><span>使用性质：</span><span id="resUsage">--</span></div>
+         </div>
+         <!-- 无结果提示 -->
+         <div class="no-result" id="noResult">未查询到该车辆信息，请核对车牌号码后重试</div>
+     </div>
+	</body>
+</html>

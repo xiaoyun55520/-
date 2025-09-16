@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+ <html lang="zh-CN">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>车辆维修经费统计</title>
+     <!-- 引入ECharts CDN -->
+     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: Arial, sans-serif;
+         }
+         body {
+             background-color: #f8f8f8;
+             padding: 20px 15px;
+         }
+         .container {
+             max-width: 1200px;
+             margin: 0 auto;
+         }
+         /* 页面标题 */
+         .page-title {
+             text-align: center;
+             color: #333;
+             font-size: 24px;
+             margin-bottom: 25px;
+             font-weight: 600;
+         }
+         /* 核心经费概览卡片 */
+         .cost-overview {
+             display: flex;
+             gap: 15px;
+             margin-bottom: 25px;
+             flex-wrap: wrap; /* 移动端自动换行 */
+         }
+         .cost-card {
+             flex: 1;
+             min-width: 180px; /* 限制最小宽度，避免挤压 */
+             background: white;
+             border-radius: 8px;
+             padding: 18px;
+             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+             text-align: center;
+         }
+         .cost-card .card-label {
+             color: #666;
+             font-size: 14px;
+             margin-bottom: 8px;
+         }
+         .cost-card .card-value {
+             color: #333;
+             font-size: 22px;
+             font-weight: 600;
+         }
+         .cost-card .card-value.total { color: #2f54eb; }
+         .cost-card .card-value.average { color: #fa8c16; }
+         .cost-card .card-value.max { color: #ff4d4f; }
+         /* 图表区域（双列自适应） */
+         .charts-container {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* 电脑双列，手机单列 */
+             gap: 20px;
+             margin-bottom: 20px;
+         }
+         /* 饼图单独居中（更适合窄屏显示） */
+         .chart-item.pie-chart {
+             grid-column: span 1;
+             max-width: 1500px;
+             margin: 0 auto;
+         }
+         /* 图表卡片样式 */
+         .chart-item {
+             background: white;
+             border-radius: 8px;
+             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+             padding: 20px;
+         }
+         .chart-title {
+             font-size: 18px;
+             color: #555;
+             margin-bottom: 15px;
+             font-weight: 500;
+             border-left: 4px solid #2f54eb; /* 左侧强调线 */
+             padding-left: 10px;
+         }
+         /* 图表容器尺寸 */
+          #monthTrendChart, #typePieChart, #carCompareChart { 
+             width: 100%;
+             height: 300px;
+         }
+		 #typePieChart{
+			 width: 100%;
+			 width: 1000px;
+		 }
+         /* 移动端适配（屏幕<500px） */
+         @media (max-width: 500px) {
+             .charts-container {
+                 grid-template-columns: 1fr; /* 强制单列 */
+             }
+             .cost-card .card-value {
+                 font-size: 20px; /* 缩小数值字体 */
+             }
+             .chart-title {
+                 font-size: 16px;
+             }
+             #monthTrendChart, #typePieChart, #carCompareChart {
+                 height: 280px; /* 降低图表高度 */
+             }
+         }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <!-- 1. 页面标题 -->
+         <h1 class="page-title">车辆维修经费统计分析</h1>
+         <!-- 2. 核心经费概览 -->
+         <div class="cost-overview">
+             <div class="cost-card">
+                 <div class="card-label">本月总维修费</div>
+                 <div class="card-value total">¥28,600</div>
+             </div>
+             <div class="cost-card">
+                 <div class="card-label">单辆车均维修费</div>
+                 <div class="card-value average">¥3,575</div>
+             </div>
+             <div class="cost-card">
+                 <div class="card-label">单辆车最高维修费</div>
+                 <div class="card-value max">¥8,200</div>
+             </div>
+             <div class="cost-card">
+                 <div class="card-label">维修车辆总数</div>
+                 <div class="card-value">8 辆</div>
+             </div>
+         </div>
+         <!-- 3. 图表区域 -->
+         <div class="charts-container">
+             <!-- 3.1 折线图：近6月维修经费趋势 -->
+             <div class="chart-item">
+                 <div class="chart-title">近6月维修经费趋势</div>
+                 <div id="monthTrendChart"></div>
+             </div>
+             <!-- 3.2 柱状图：各车辆维修经费对比 -->
+			 <div>
+                 <div class="chart-title">各车辆维修经费对比</div>
+                 <div id="carCompareChart"></div>
+             </div>
+             <!-- 3.3 饼图：维修类型经费占比 -->
+             <div class="chart-item pie-chart">
+                 <div class="chart-title">维修类型经费占比</div>
+                 <div id="typePieChart"></div>
+             </div>
+         </div>
+     </div>
+     <script>
+         // 图表初始化通用函数
+         function initChart(domId, option) {
+             const chartDom = document.getElementById(domId);
+             const myChart = echarts.init(chartDom);
+             myChart.setOption(option);
+             // 窗口缩放时自适应
+             window.addEventListener('resize', () => myChart.resize());
+         }
+         // 1. 折线图：近6月维修经费趋势
+         initChart('monthTrendChart', {
+             tooltip: {
+                 trigger: 'axis',
+                 formatter: '{b}：¥{c}' // 悬浮显示“月份：金额”
+             },
+             xAxis: {
+                 type: 'category',
+                 data: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                 axisLabel: { fontSize: 12 },
+                 axisLine: { lineStyle: { color: '#eee' } }
+             },
+             yAxis: {
+                 type: 'value',
+                 name: '经费（元）',
+                 nameTextStyle: { fontSize: 12, color: '#666' },
+                 axisLabel: { 
+                     fontSize: 12,
+                     formatter: '¥{value}' // 坐标轴显示“¥金额”
+                 },
+                 axisLine: { lineStyle: { color: '#eee' } },
+                 splitLine: { lineStyle: { color: '#f5f5f5' } }
+             },
+             series: [{
+                 data: [22000, 18500, 25000, 21000, 32000, 28600], // 模拟月度经费
+                 type: 'line',
+                 smooth: true,
+                 lineStyle: { width: 3, color: '#2f54eb' },
+                 itemStyle: { radius: 5, color: '#2f54eb', borderWidth: 2, borderColor: '#fff' },
+                 areaStyle: { 
+                     color: { 
+                         type: 'linear', 
+                         x: 0, y: 0, x2: 0, y2: 1,
+                         colorStops: [{ offset: 0, color: 'rgba(47,84,235,0.2)' }, { offset: 1, color: 'rgba(47,84,235,0)' }]
+                     } 
+                 }
+             }]
+         });
+         // 2. 柱状图：各车辆维修经费对比
+         initChart('carCompareChart', {
+             tooltip: {
+                 trigger: 'axis',
+                 formatter: '{b}：¥{c}'
+             },
+             xAxis: {
+                 type: 'category',
+                 data: ['京A12345', '京A67890', '沪B23456', '粤A34567', '苏E45678', '浙A56789'], // 模拟车牌
+                 axisLabel: { fontSize: 12, rotate: 15 }, // 车牌文字旋转，避免重叠
+                 axisLine: { lineStyle: { color: '#eee' } }
+             },
+             yAxis: {
+                 type: 'value',
+                 name: '经费（元）',
+                 nameTextStyle: { fontSize: 12, color: '#666' },
+                 axisLabel: { fontSize: 12, formatter: '¥{value}' },
+                 axisLine: { lineStyle: { color: '#eee' } },
+                 splitLine: { lineStyle: { color: '#f5f5f5' } }
+             },
+             series: [{
+                 data: [3200, 8200, 2800, 4500, 5100, 2900], // 各车辆维修经费
+                 type: 'bar',
+                 barWidth: '50%',
+                 itemStyle: {
+                     color: '#fa8c16',
+                     borderRadius: [4, 4, 0, 0] // 顶部圆角
+                 }
+             }]
+         });
+         // 3. 饼图：维修类型经费占比
+         initChart('typePieChart', {
+             tooltip: {
+                 trigger: 'item',
+                 formatter: '{b}：¥{c}（{d}%）' // 显示“类型：金额（占比）”
+             },
+             legend: {
+                 bottom: 0,
+                 textStyle: { fontSize: 13 },
+                 itemWidth: 12,
+                 itemHeight: 12
+             },
+             series: [{
+                 name: '维修类型',
+                 type: 'pie',
+                 radius: ['45%', '70%'], // 环形设计
+                 center: ['50%', '45%'], // 居中显示
+                 itemStyle: {
+                     borderRadius: 6,
+                     borderColor: '#fff',
+                     borderWidth: 2
+                 },
+                 label: { show: false }, // 隐藏扇区内部文字
+                 emphasis: { label: { show: true, fontSize: 14, fontWeight: 500 } },
+                 labelLine: { show: false },
+                 data: [
+                     { value: 12000, name: '发动机维修' },
+                     { value: 8500, name: '轮胎更换' },
+                     { value: 4800, name: '刹车系统' },
+                     { value: 2300, name: '电路维修' },
+                     { value: 1000, name: '其他配件' }
+                 ],
+                 color: ['#2f54eb', '#fa8c16', '#ff4d4f', '#52c41a', '#949494']
+             }]
+         });
+     </script>
+ </body>
+</html>
