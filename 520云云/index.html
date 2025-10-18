@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一周年纪念 - 致梁馥云</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fdf0f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, #fff5f9, #ffeef6);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #e94b7c;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+        
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .photo-item {
+            width: 70%;
+            max-width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .message {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #e94b7c;
+        }
+        
+        .message p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #e94b7c;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .heart {
+            color: #e94b7c;
+            display: inline-block;
+            margin: 0 5px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .photo-item {
+                width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>一周年纪念 <span class="heart">♥</span></h1>
+        <p class="subtitle">一周年快乐呀我的宝贝</p>
+        
+		<audio controls>
+			<source src="css/_.mp4"/>
+		</audio>
+        <div class="photo-gallery">
+            <div class="photo-item">
+                <!-- 请将下面的图片路径替换为你的第一张照片路径 -->
+                <img src="img/1760712517660_edit_788140914274529.png" alt="我们的第一次约会">
+            </div>
+            <div class="photo-item">
+                <!-- 请将下面的图片路径替换为你的第二张照片路径 -->
+                <img src="img/1760712721492_edit_788072515145373.png" alt="我们一起走过的时光">
+            </div>
+            <div class="photo-item">
+                <!-- 请将下面的图片路径替换为你的第三张照片路径 -->
+                <img src="img/1760712716592_edit_788116454484429.png" alt="我们的美好回忆">
+            </div>
+        </div>
+        
+        <div class="message">
+            <p>从第一次约会到现在，365天的陪伴，无数个美好瞬间。</p>
+            <p>这三张背影记录了我们一起走过的路，也见证了我们爱情的开始与成长。</p>
+            <p>期待与你创造更多美好回忆，走向更远的未来。</p>
+            <p class="signature">永远爱你的我</p>
+        </div>
+        
+        <footer>
+            <p>一周年快乐 <span class="heart">♥</span> 我们的爱情故事仍在继续</p>
+        </footer>
+		 </div>
+		</body>
+		</html>
