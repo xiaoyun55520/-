@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大同东南邑 - 历史文化故事集</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f4e9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://via.placeholder.com/1200x400/8B4513/FFFFFF?text=大同东南邑') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: #8B4513;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            padding: 15px 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #F4A460;
+        }
+        
+        /* 主内容区 */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #8B4513;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: #F4A460;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* IP形象部分 */
+        .ip-character {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+        }
+        
+        .ip-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .ip-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ip-description {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .ip-description h3 {
+            font-size: 2rem;
+            color: #8B4513;
+            margin-bottom: 20px;
+        }
+        
+        .ip-description p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* 故事集部分 */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .story-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .story-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .story-card:hover .story-image img {
+            transform: scale(1.1);
+        }
+        
+        .story-content {
+            padding: 20px;
+        }
+        
+        .story-content h3 {
+            font-size: 1.5rem;
+            color: #8B4513;
+            margin-bottom: 10px;
+        }
+        
+        .story-content p {
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background-color: #8B4513;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .read-more:hover {
+            background-color: #F4A460;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #F4A460;
+        }
+        
+        .footer-bottom {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .ip-character {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <div class="container">
+            <h1>大同东南邑</h1>
+            <p>千年古邑，文化传承，历史与现代的交融之地</p >
+        </div>
+    </header>
+    
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href=" ">首页</a ></li>
+                <li><a href="#ip">IP形象</a ></li>
+                <li><a href="#stories">故事集</a ></li>
+                <!-- <li><a href="#about">关于我们</a ></li>
+                <li><a href="#contact">联系我们</a ></li> -->
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- IP形象部分 -->
+    <section id="ip">
+        <div class="container">
+            <div class="section-title">
+                <h2>IP形象 - 邑宝</h2>
+            </div>
+            <div class="ip-character">
+                <div class="ip-image">
+                    <img src="img/微信图片_20251113171318_102_80.jpg" alt="邑宝 - 大同东南邑IP形象">
+                </div>
+                <div class="ip-description">
+                    <h3>邑宝 - 大同东南邑的文化使者</h3>
+                    <p>邑宝是大同东南邑的官方IP形象，设计灵感来源于大同悠久的历史文化和传统建筑元素。</p >
+                    <p>形象特点：</p >
+                    <ul>
+                        <li>头发呈青绿色，造型独特且富有层次感，融入了大同特色的龙元素 —— 头顶有精致的龙形装饰，</li>
+                        <li>身着带有传统纹样的服饰，以白色为底色，搭配青、金双色的回纹、几何纹等装饰，服饰风格借鉴了大同历史文化中的传统服饰元素，同时结合现代卡通的简约设计，腰间的配饰也颇具古风韵味，整体服饰展现了传统文化的典雅。</li>
+                        <li>造型可爱灵动，色彩搭配和谐且富有文化感，通过龙元素、传统纹样等设计，传递出大同东南邑文化街区的历史底蕴与活力。</li>
+                        <li>有着大大的眼睛，其中一只眼睛俏皮地 wink，搭配粉嫩的腮红和张开的嘴巴，呈现出活泼、亲切的神态，极具亲和力，展现大同人民的热情好客</li>
+                    </ul>
+                    <p>邑宝不仅是东南邑的文化象征，更是连接过去与未来的桥梁，带领人们探索大同深厚的历史文化底蕴。</p >
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 故事集部分 -->
+    <section id="stories">
+        <div class="container">
+            <div class="section-title">
+                <h2>东南邑故事集</h2>
+            </div>
+            <div class="stories-grid">
+                <!-- 故事1 -->
+                <div class="story-card">
+                    <div class="story-image">
+                         <img src="img/微信图片_20251114114103_142_80.jpg" alt="古城往事"> 
+                    </div> 
+                    <div class="story-content">
+                        <h3>锔瓷里的星光</h3>
+                        <p>  暮色像打翻的墨汁漫过蔡家巷时，阿邑听见圣杰锔瓷工作室里传来叮叮当当的轻响。他踮着脚尖从窗缝里张望，看见芦圣杰师傅正对着一盏残缺的清代琉璃灯发愁——灯壁上裂了道弯弯曲曲的纹，像条迷路的小河。
+“要是能让裂纹变成好看的图案就好啦。”阿邑小声嘀咕，身后的纱带突然泛起微光，飘到工作台上的锔钉盒里。奇妙的事情发生了，那些银质锔钉竟自己跳出来，沿着裂纹排列成云冈石窟的飞天剪影。芦师傅惊讶地睁大眼，顺势将锔钉敲牢，当最后一颗锔钉落下时，琉璃灯突然亮起，裂纹处的飞天仿佛活了过来，在光影中轻舞。
+“原来残缺也能开出美的花。”阿邑晃着脑袋想。后来他发现，芦师傅把这个“飞天锔瓷灯”摆在橱窗最显眼的位置，旁边还放着一排锔瓷首饰，年轻人们围着挑选时，眼里闪着和琉璃灯一样的光。</p >
+                        <!-- <a href="#" class="read-more">阅读更多</a > -->
+                    </div>
+                </div>
+                
+                <!-- 故事2 -->
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="img/微信图片_20251114155456_145_80.jpg" alt="匠人精神">
+                    </div> 
+                    <div class="story-content">
+                        <h3>皮雕上的牡丹</h3>
+                        <p>夏至那天，东南邑举办“非遗市集”，茜子皮雕工作室前围满了人。阿邑挤在最前面，看着茜子姐姐用刻刀在牛皮上勾勒图案。“姐姐，你雕的牡丹好像少了点什么。”他忍不住开口。
+茜子停下手中的刀，笑着问：“那你说少了什么？”阿邑转身跑到街角，采来一片带着晨露的槐树叶，又指着远处华严寺的飞檐：“少了咱们东南邑的味道呀！”他身后的纱带飘到牛皮上，画出槐树叶的脉络和斗拱的轮廓。茜子眼睛一亮，立刻在牡丹花瓣间加入了这些元素，还在花芯里刻了个小小的阿邑剪影。
+市集结束时，这个“东南邑牡丹”皮雕挂饰被一位来自上海的游客买走了。“我要把大同的春天带回去。”游客说。阿邑望着远去的背影，纱带又泛起了开心的光芒——原来文化就像蒲公英，能乘着风飞到很远的地方。</p >
+                        <!-- <a href="#" class="read-more">阅读更多</a > -->
+                    </div>
+                </div>
+                
+                <!-- 故事3 -->
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="img/微信图片_20251114155902_147_80.jpg" alt="节庆记忆">
+                    </div>
+                    <div class="story-content">
+                        <h3>丝路广场的月光剧场</h3>
+                        <p>中秋夜的丝路广场格外热闹，“可编辑盒子”的折叠窗全部打开，变成了露天舞台。阿邑趴在老槐树上，看着《行见丝路》的表演——波斯商人牵着骆驼走过，北魏侍女提着宫灯巡游，突然一阵风吹来，把表演用的丝绸幕布吹上了天。
+“不好！”阿邑急得跳下来，身后的纱带飞速变长，缠住了飘落的幕布。可他力气太小，眼看幕布要掉进醋文化馆的醋缸里，台下的观众们突然一起伸手，像传递接力棒一样把幕布送回舞台。表演继续进行，阿邑发现幕布上竟多了许多手印形状的月光，在夜色中闪闪发亮。
+“这是最特别的舞台装饰！”导演高兴地说。那天晚上，阿邑和游客们一起坐在月光下，听着波斯商队的故事，闻着醋香与咖啡香交织的味道，觉得东南邑就像一个神奇的魔法盒子，总能把意外变成惊喜。</p >
+                        <!-- <a href="#" class="read-more">阅读更多</a > -->
+                    </div>
+                </div>
+				<!-- 故事4 -->
+					            <div class="story-card">
+					                    <div class="story-image">
+					                        <img src="img/微信图片_20251114160600_149_80.jpg" alt="匠人精神">
+					                    </div>
+					                    <div class="story-content">
+					                        <h3>凡华造物的色彩密码</h3>
+					                        <p>雨季来临时，阿邑总喜欢躲进凡华造物的陶瓷店。周雄昊师傅正在调配一种特别的蓝色，可怎么调都不满意。“我想要一种像大同天空一样，既有历史厚重感又有青春活力的颜色。”
+				阿邑爬上颜料架，把脸颊贴在青花瓷盘上——那是上周从老院落里捡到的碎片。身后的纱带突然吸收了窗外的雨光，变成了一种奇妙的蓝色，滴落在颜料碗里。“就是这个！”周师傅惊喜地叫起来。他用这种“阿邑蓝”烧制了一系列陶瓷饰品，上面还刻着东南邑的街巷地图。
+				第一批饰品上架那天，正好赶上“浮感疗愈节”。年轻人们戴着“阿邑蓝”项链在街区漫步，蓝色的光芒与青砖灰瓦相映成趣。阿邑坐在店门口的台阶上，看着那些跳动的蓝色光斑，突然明白：传统的颜色，只要用心调配，就能画出属于现在的精彩。</p >
+					                        <!-- <a href="#" class="read-more">阅读更多</a > -->
+					                    </div>
+					                </div>
+									<!-- 故事5 -->
+										            <div class="story-card">
+										                    <div class="story-image">
+										                        <img src="img/微信图片_20251114160939_152_80.jpg" alt="匠人精神">
+										                    </div>
+										                    <div class="story-content">
+										                        <h3>老槐树的记忆拼图</h3>
+										                        <p>冬至那天，街区要给最古老的老槐树做“体检”。阿邑发现树洞里藏着许多老物件：一张民国时期的戏票、半块建国初期的糖纸、还有一张上世纪八十年代的街区照片。“要是能知道这些物件的故事就好啦。”他把物件摆在树下，身后的纱带开始发光，将这些碎片连成了一幅流动的画面。
+画面里，民国时的戏班在槐树下搭台演出，建国后的孩子们围着糖纸嬉戏，八十年代的青年们在照片里的老房前合影。越来越多的居民和游客围过来，分享着自己与东南邑的故事。一位白发老人指着照片说：“这是我家以前的院子，现在变成了念夏艺术中心。”
+那天晚上，大家把这些故事写成卡片，挂在老槐树上。阿邑看着挂满故事的树枝，觉得东南邑就像这棵老槐树，深深扎在历史里，枝叶却向着未来生长。而他自己，就是连接过去与未来的那根最温柔的纽带。
+当新年的钟声敲响时，阿邑站在古城墙上，看着东南邑的万家灯火。他知道，只要这片街区的青砖还在、非遗的技艺还在、人们的笑容还在，他的漫游故事就永远不会结束。而那些藏在街巷里的奇遇，正等着每一个来到这里的人去发现。</p >
+										                        <!-- <a href="#" class="read-more">阅读更多</a > -->
+										                    </div>
+										                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <p>致力于大同东南邑历史文化保护与传播的团队，通过创新方式让传统文化焕发新生。</p >
+                </div>
+                <div class="footer-section">
+                    <h3>联系方式</h3>
+                    <p>邮箱: XXXXXXXXXX</p >
+                    <p>电话: XXXXXXX</p >
+                    <p>地址: 山西省大同市东南邑历史文化区</p >
+                </div>
+                                <div class="footer-section">
+                                    <h3>关注我们</h3>
+                                    <p>抖音: 巷里邑事</p >
+                                    <!-- <p>微博: @大同东南邑</p > -->
+                                </div>
+                            </div>
+                            <div class="footer-bottom">
+                                <p>&copy; 2023 大同东南邑文化传播中心 版权所有</p >
+                            </div>
+                        </div>
+                    </footer>
+                </body>
+                </html>
