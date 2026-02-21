@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>万荣云仙花馍 - 山西非物质文化遗产</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #fef7f0 0%, #fff5eb 100%);
+            color: #2d1810;
+        }
+
+        .title-font {
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+
+        /* 渐变文字效果 */
+        .gradient-text {
+            background: linear-gradient(135deg, #c9302c 0%, #d44a4a 50%, #e86464 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 滚动动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* 悬浮效果 */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(201, 48, 44, 0.15);
+        }
+
+        /* 传统纹样背景 */
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9302c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* 导航栏滚动效果 */
+        .nav-scrolled {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 图片容器 */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .image-container img {
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fef7f0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c9302c;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg title-font">云</span>
+                    </div>
+                    <span class="text-xl font-bold title-font gradient-text">万荣云仙花馍</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-red-600 transition-colors font-medium">首页</a>
+                    <a href="#about" class="text-gray-700 hover:text-red-600 transition-colors font-medium">非遗故事</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-red-600 transition-colors font-medium">作品展示</a>
+                    <a href="#process" class="text-gray-700 hover:text-red-600 transition-colors font-medium">制作工艺</a>
+                    <a href="#contact" class="text-gray-700 hover:text-red-600 transition-colors font-medium">联系我们</a>
+                </div>
+                <button id="menuBtn" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block text-gray-700 hover:text-red-600 transition-colors">首页</a>
+                <a href="#about" class="block text-gray-700 hover:text-red-600 transition-colors">非遗故事</a>
+                <a href="#gallery" class="block text-gray-700 hover:text-red-600 transition-colors">作品展示</a>
+                <a href="#process" class="block text-gray-700 hover:text-red-600 transition-colors">制作工艺</a>
+                <a href="#contact" class="block text-gray-700 hover:text-red-600 transition-colors">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页横幅 -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pattern-bg">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/80"></div>
+        <div class="relative z-10 text-center px-4 fade-in-up">
+            <div class="mb-6">
+                <span class="inline-block px-4 py-2 bg-red-600 text-white rounded-full text-sm font-medium tracking-wider">
+                    山西省非物质文化遗产
+                </span>
+            </div>
+            <h1 class="title-font text-6xl md:text-8xl font-bold gradient-text mb-6">
+                万荣云仙花馍
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 mb-4 font-medium">
+                千年传承 · 匠心独运 · 艺术瑰宝
+            </p>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+                源于晋南民间的传统面食艺术，承载着深厚的文化内涵和美好寓意。<br>
+                每一朵花馍都是匠心之作，每一个造型都有其独特的文化符号。
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#about" class="px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full font-semibold hover:from-red-700 hover:to-red-800 transition-all transform hover:scale-105 shadow-lg">
+                    探索非遗故事
+                </a>
+                <a href="#gallery" class="px-8 py-4 bg-white text-red-600 border-2 border-red-600 rounded-full font-semibold hover:bg-red-50 transition-all transform hover:scale-105">
+                    欣赏作品
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 关于花馍 -->
+    <section id="about" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-red-600 font-medium tracking-wider">ABOUT US</span>
+                <h2 class="title-font text-4xl md:text-5xl font-bold gradient-text mt-2 mb-4">非遗故事</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h3 class="title-font text-3xl font-bold text-gray-800">传承千年的面食艺术</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        万荣云仙花馍，源于山西省运城市万荣县，是晋南地区最具代表性的民间面食艺术之一。它起源于明清时期，至今已有数百年历史，是当地婚丧嫁娶、节庆祭祀时必不可少的传统食品。
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        "云仙"二字寓意吉祥，象征着如云般飘逸、如仙般脱俗的艺术境界。每一朵花馍都凝聚着民间艺人的智慧和情感，承载着丰富的民俗文化和美好祝愿。
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 pt-6">
+                        <div class="text-center p-4 bg-red-50 rounded-lg">
+                            <div class="text-3xl font-bold gradient-text">300+</div>
+                            <div class="text-gray-600 text-sm mt-1">年传承历史</div>
+                        </div>
+                        <div class="text-center p-4 bg-red-50 rounded-lg">
+                            <div class="text-3xl font-bold gradient-text">100+</div>
+                            <div class="text-gray-600 text-sm mt-1">传统纹样</div>
+                        </div>
+                        <div class="text-center p-4 bg-red-50 rounded-lg">
+                            <div class="text-3xl font-bold gradient-text">50+</div>
+                            <div class="text-gray-600 text-sm mt-1">制作工序</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-container shadow-2xl">
+                    <div class="aspect-square bg-gradient-to-br from-red-100 to-orange-100 rounded-2xl flex items-center justify-center p-8">
+                        <div class="text-center">
+                            <img src="img/14c7d9055aaa17eaa3d8ea814ee52412.jpg" >
+                            <p class="text-gray-600 italic">云仙花馍作品展示区</p>
+                            <p class="text-sm text-gray-500 mt-2">传统手工艺的精美呈现</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 文化价值 -->
+    <section class="py-20 px-4 pattern-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-red-600 font-medium tracking-wider">CULTURAL VALUE</span>
+                <h2 class="title-font text-4xl md:text-5xl font-bold gradient-text mt-2 mb-4">文化价值</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">🎨</span>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">艺术价值</h3>
+                    <p class="text-gray-600">融合了雕刻、绘画等多种艺术形式，造型精美、色彩艳丽，具有独特的审美价值。</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">📖</span>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">历史价值</h3>
+                    <p class="text-gray-600">记录了晋南地区的民间习俗和历史变迁，是研究地方文化的重要实物资料。</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">🤝</span>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">社会价值</h3>
+                    <p class="text-gray-600">体现了劳动人民的智慧和创造力，促进了社区凝聚力和文化认同感。</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">💎</span>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">经济价值</h3>
+                    <p class="text-gray-600">带动当地特色产业发展，促进非遗传承与文旅融合，助力乡村振兴。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品展示 -->
+    <section id="gallery" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-red-600 font-medium tracking-wider">WORKS GALLERY</span>
+                <h2 class="title-font text-4xl md:text-5xl font-bold gradient-text mt-2 mb-4">作品展示</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group">
+                    <div class="image-container rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-pink-100 to-red-100 flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <div class="text-5xl mb-3">🏵️</div>
+                                <p class="text-gray-600 font-medium">吉祥牡丹</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-2">吉祥牡丹</h3>
+                        <p class="text-gray-600">象征富贵吉祥，是婚礼、寿宴的首选花馍造型</p>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="image-container rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <img src="img/96856f77dd73ed1b5c65513938575aaf.jpg" >
+                                <p class="text-gray-600 font-medium"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-2">寿桃</h3>
+                        <p class="text-gray-600">寓意长寿安康，是祝寿场合的必备礼品</p>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="image-container rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-red-100 to-pink-100 flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <div class="text-5xl mb-3">💒</div>
+                                <p class="text-gray-600 font-medium">龙凤呈祥</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-2">龙凤呈祥</h3>
+                        <p class="text-gray-600">代表婚姻美满、夫妻和美，是最受喜爱的婚庆花馍</p>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="image-container rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <div class="text-5xl mb-3">🐉</div>
+                                <p class="text-gray-600 font-medium">祥云神龙</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-2">祥云神龙</h3>
+                        <p class="text-gray-600">寓意风调雨顺、五谷丰登，常用于祭祀活动</p>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="image-container rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <div class="text-5xl mb-3">🌸</div>
+                                <p class="text-gray-600 font-medium">十二生肖</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-2">十二生肖</h3>
+                        <p class="text-gray-600">造型各异，栩栩如生，适合春节、生日等节庆场合</p>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="image-container rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <div class="text-5xl mb-3">🎋</div>
+                                <p class="text-gray-600 font-medium">年年有余</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-2">年年有余</h3>
+                        <p class="text-gray-600">象征生活富足、年年有余财，寓意吉祥美好</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 制作工艺 -->
+    <section id="process" class="py-20 px-4 pattern-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-red-600 font-medium tracking-wider">CRAFTSMANSHIP</span>
+                <h2 class="title-font text-4xl md:text-5xl font-bold gradient-text mt-2 mb-4">制作工艺</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-6">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <span class="text-3xl">🌾</span>
+                    </div>
+                    <div class="text-sm text-red-600 font-medium mb-2">STEP 1</div>
+                    <h3 class="title-font text-lg font-bold text-gray-800 mb-2">选料</h3>
+                    <p class="text-gray-600 text-sm">选用优质小麦面粉，确保原料纯正</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <span class="text-3xl">🧈</span>
+                    </div>
+                    <div class="text-sm text-red-600 font-medium mb-2">STEP 2</div>
+                    <h3 class="title-font text-lg font-bold text-gray-800 mb-2">和面</h3>
+                    <p class="text-gray-600 text-sm">手工和面，揉至光滑有弹性</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <span class="text-3xl">✂️</span>
+                    </div>
+                    <div class="text-sm text-red-600 font-medium mb-2">STEP 3</div>
+                    <h3 class="title-font text-lg font-bold text-gray-800 mb-2">造型</h3>
+                    <p class="text-gray-600 text-sm">手工捏制，雕刻精美纹样</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <span class="text-3xl">🎨</span>
+                    </div>
+                    <div class="text-sm text-red-600 font-medium mb-2">STEP 4</div>
+                    <h3 class="title-font text-lg font-bold text-gray-800 mb-2">上色</h3>
+                    <p class="text-gray-600 text-sm">使用天然色素，点缀色彩</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <span class="text-3xl">🔥</span>
+                    </div>
+                    <div class="text-sm text-red-600 font-medium mb-2">STEP 5</div>
+                    <h3 class="title-font text-lg font-bold text-gray-800 mb-2">蒸制</h3>
+                    <p class="text-gray-600 text-sm">大火蒸制，松软可口</p>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="title-font text-2xl font-bold text-gray-800 text-center mb-6">匠心传承 守护非遗</h3>
+                <p class="text-gray-700 text-center max-w-3xl mx-auto leading-relaxed">
+                    每一道工序都凝聚着民间艺人的心血与智慧。从选料到成品，需要经过数十道工序，
+                    每一步都需要精湛的技艺和耐心的打磨。正是这份坚守和传承，让万荣云仙花馍得以延续至今，
+                    成为山西文化的一张亮丽名片。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌理念 -->
+    <section class="py-20 px-4 bg-gradient-to-br from-red-600 to-red-700 text-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="title-font text-4xl md:text-5xl font-bold mb-6">传承不守旧 · 创新不忘本</h2>
+            <p class="text-xl opacity-90 max-w-3xl mx-auto mb-10 leading-relaxed">
+                我们致力于将传统工艺与现代设计理念相结合，让非遗文化在新时代焕发新的生机与活力。
+                每一朵花馍都是对传统文化的致敬，也是对未来创新的探索。
+            </p>
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                    <div class="text-4xl mb-4">🌟</div>
+                    <h3 class="title-font text-xl font-bold mb-2">品质至上</h3>
+                    <p class="opacity-90">坚持纯手工制作，严选优质原料，确保每一件作品都是精品</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="title-font text-xl font-bold mb-2">文化传承</h3>
+                    <p class="opacity-90">弘扬非遗文化，传播传统技艺，让更多人了解和喜爱花馍艺术</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                    <div class="text-4xl mb-4">💫</div>
+                    <h3 class="title-font text-xl font-bold mb-2">创新发展</h3>
+                    <p class="opacity-90">与时俱进，不断创新，让传统文化与现代生活完美融合</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-red-600 font-medium tracking-wider">CONTACT US</span>
+                <h2 class="title-font text-4xl md:text-5xl font-bold gradient-text mt-2 mb-4">联系我们</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="title-font text-2xl font-bold text-gray-800 mb-6">欢迎咨询合作</h3>
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        如果您对万荣云仙花馍感兴趣，或者有任何合作意向，欢迎随时联系我们。
+                        我们期待与您携手，共同传承和弘扬这一珍贵的非物质文化遗产。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                                <span class="text-xl">📍</span>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 text-sm">地址</div>
+                                <div class="text-gray-800 font-medium">山西省运城市万荣县</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                                <span class="text-xl">📞</span>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 text-sm">电话</div>
+                                <div class="text-gray-800 font-medium">138-XXXX-XXXX</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                                <span class="text-xl">✉️</span>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 text-sm">邮箱</div>
+                                <div class="text-gray-800 font-medium">contact@yunxianhuamo.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-6">在线留言</h3>
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">姓名</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition-all" placeholder="请输入您的姓名">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">联系方式</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition-all" placeholder="请输入手机号或邮箱">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">留言内容</label>
+                            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition-all h-32 resize-none" placeholder="请输入您的留言内容"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-semibold hover:from-red-700 hover:to-red-800 transition-all transform hover:scale-[1.02] shadow-lg">
+                            提交留言
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg title-font">云</span>
+                        </div>
+                        <span class="text-xl font-bold title-font">万荣云仙花馍</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        传承非遗文化，弘扬传统技艺。让万荣云仙花馍走向世界，让更多人了解和喜爱这一珍贵的民间艺术。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="title-font text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition-colors">首页</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">非遗故事</a></li>
+                        <li><a href="#gallery" class="hover:text-white transition-colors">作品展示</a></li>
+                        <li><a href="#process" class="hover:text-white transition-colors">制作工艺</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="title-font text-lg font-bold mb-4">服务项目</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>婚庆花馍定制</li>
+                        <li>寿宴花馍定制</li>
+                        <li>节庆礼盒定制</li>
+                        <li>非遗体验活动</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="title-font text-lg font-bold mb-4">关注我们</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <span>📱</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <span>💬</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <span>📺</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+                <p>© 2024 万荣云仙花馍 · 山西省非物质文化遗产 | 品牌策划竞赛项目</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 点击菜单项后关闭移动端菜单
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 表单提交处理
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('感谢您的留言！我们会尽快与您联系。');
+            contactForm.reset();
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有需要动画的元素
+        document.querySelectorAll('section > div').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
